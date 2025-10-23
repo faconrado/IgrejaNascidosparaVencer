@@ -1,0 +1,128 @@
+<!-- Início: Bloco da Igreja Nascidos para Vencer - Quiz Bíblico + Link Instagram -->
+<section id="nascidos-para-vencer" style="max-width:800px;margin:30px auto;padding:20px;border:1px solid #ddd;border-radius:8px;font-family:Arial,Helvetica,sans-serif;">
+  <header style="text-align:center;margin-bottom:18px;">
+    <h1 style="margin:0;font-size:28px;color:#0a3b66;">Igreja Nascidos para Vencer</h1>
+    <p style="margin:6px 0 0;color:#333;">Jardim Silvina — São Bernardo do Campo, SP</p>
+    <a href="https://www.instagram.com/ip_nascidos_para_vencer?igsh=MWt2YXA2OGVzY2ttag==" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;padding:8px 14px;border-radius:6px;background:#E1306C;color:white;text-decoration:none;font-weight:600;">
+      Siga-nos no Instagram
+    </a>
+  </header>
+
+  <div id="quiz-container" style="margin-top:12px;">
+    <label for="participantName" style="display:block;margin-bottom:6px;font-weight:600;">Digite seu nome antes de começar:</label>
+    <input id="participantName" type="text" placeholder="Seu nome" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;font-size:16px;box-sizing:border-box;" />
+
+    <form id="bibleQuiz" style="margin-top:16px;">
+      <!-- Pergunta 1 -->
+      <fieldset style="border:none;margin:0 0 14px;padding:0;">
+        <legend style="font-weight:700;margin-bottom:6px;">1) Quem foi lançado na cova dos leões?</legend>
+        <label><input type="radio" name="q1" value="a"> Daniel</label><br>
+        <label><input type="radio" name="q1" value="b"> Jonas</label><br>
+        <label><input type="radio" name="q1" value="c"> Elias</label>
+      </fieldset>
+
+      <!-- Pergunta 2 -->
+      <fieldset style="border:none;margin:0 0 14px;padding:0;">
+        <legend style="font-weight:700;margin-bottom:6px;">2) Quem construiu a arca?</legend>
+        <label><input type="radio" name="q2" value="a"> Abraão</label><br>
+        <label><input type="radio" name="q2" value="b"> Noé</label><br>
+        <label><input type="radio" name="q2" value="c"> Moisés</label>
+      </fieldset>
+
+      <!-- Pergunta 3 -->
+      <fieldset style="border:none;margin:0 0 14px;padding:0;">
+        <legend style="font-weight:700;margin-bottom:6px;">3) Quantos dias e noites choveu durante o dilúvio?</legend>
+        <label><input type="radio" name="q3" value="a"> 40 dias e 40 noites</label><br>
+        <label><input type="radio" name="q3" value="b"> 7 dias e 7 noites</label><br>
+        <label><input type="radio" name="q3" value="c"> 100 dias e 100 noites</label>
+      </fieldset>
+
+      <!-- Pergunta 4 -->
+      <fieldset style="border:none;margin:0 0 14px;padding:0;">
+        <legend style="font-weight:700;margin-bottom:6px;">4) Quem traiu Jesus por 30 moedas de prata?</legend>
+        <label><input type="radio" name="q4" value="a"> Pedro</label><br>
+        <label><input type="radio" name="q4" value="b"> João</label><br>
+        <label><input type="radio" name="q4" value="c"> Judas Iscariotes</label>
+      </fieldset>
+
+      <!-- Pergunta 5 -->
+      <fieldset style="border:none;margin:0 0 14px;padding:0;">
+        <legend style="font-weight:700;margin-bottom:6px;">5) Qual é o primeiro livro da Bíblia?</legend>
+        <label><input type="radio" name="q5" value="a"> Êxodo</label><br>
+        <label><input type="radio" name="q5" value="b"> Gênesis</label><br>
+        <label><input type="radio" name="q5" value="c"> Salmos</label>
+      </fieldset>
+
+      <div style="text-align:center;margin-top:12px;">
+        <button type="button" id="submitQuiz" style="padding:10px 18px;border-radius:6px;border:none;background:#0a7a44;color:white;font-weight:700;cursor:pointer;">
+          Enviar respostas
+        </button>
+      </div>
+    </form>
+
+    <div id="resultMessage" aria-live="polite" style="margin-top:16px;text-align:center;font-size:18px;font-weight:700;"></div>
+  </div>
+
+  <footer style="margin-top:18px;font-size:13px;color:#666;text-align:center;">
+    <p style="margin:0;">Igreja Nascidos para Vencer — Jardim Silvina, São Bernardo do Campo, SP.</p>
+  </footer>
+</section>
+
+<script>
+  (function(){
+    const correctAnswers = { q1: 'a', q2: 'b', q3: 'a', q4: 'c', q5: 'b' };
+    const submitBtn = document.getElementById('submitQuiz');
+    const resultDiv = document.getElementById('resultMessage');
+    const nameInput = document.getElementById('participantName');
+
+    submitBtn.addEventListener('click', function(){
+      const name = (nameInput.value || '').trim();
+      if(!name){
+        resultDiv.style.color = '#b00020';
+        resultDiv.textContent = 'Por favor, digite seu nome antes de enviar.';
+        return;
+      }
+
+      // coletar respostas
+      const answers = {};
+      for(let i=1;i<=5;i++){
+        const radios = document.getElementsByName('q'+i);
+        let chosen = null;
+        for(const r of radios){
+          if(r.checked){ chosen = r.value; break; }
+        }
+        if(!chosen){
+          resultDiv.style.color = '#b00020';
+          resultDiv.textContent = 'Por favor, responda todas as perguntas antes de enviar.';
+          return;
+        }
+        answers['q'+i] = chosen;
+      }
+
+      // checar acertos
+      let allCorrect = true;
+      for(let i=1;i<=5;i++){
+        if(answers['q'+i] !== correctAnswers['q'+i]){
+          allCorrect = false;
+          break;
+        }
+      }
+
+      if(allCorrect){
+        resultDiv.style.color = '#0a7a44';
+        resultDiv.textContent = Parabéns, ${escapeHtml(name)}! Você acertou todas.;
+      } else {
+        resultDiv.style.color = '#aa5500';
+        resultDiv.textContent = Estude mais, ${escapeHtml(name)}.;
+      }
+    });
+
+    // função simples para evitar XSS em caso de nomes com HTML
+    function escapeHtml(str){
+      return str.replace(/[&<>"']/g, function(m){
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];
+      });
+    }
+  })();
+</script>
+<!-- Fim: Bloco da Igreja Nascidos para Vencer -->
