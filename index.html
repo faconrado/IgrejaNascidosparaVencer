@@ -1,4 +1,4 @@
-<!-- 🌟 Início: Quiz Bíblico Avançado com Desenhos - Igreja Nascidos para Vencer -->
+<!-- 🌟 Início: Quiz Bíblico Avançado com Desenhos - Igreja Nascidos para Vencer (versão com feedback visual e placar) -->
 <section id="nascidos-para-vencer" style="max-width:880px;margin:30px auto;padding:30px;border:3px solid #ddd;border-radius:16px;background:linear-gradient(180deg,#fdfdfd,#f5f9ff);font-family:'Poppins',Arial,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,0.1);">
   
   <header style="text-align:center;margin-bottom:24px;">
@@ -29,6 +29,7 @@
           border-radius:10px;
           box-shadow:0 2px 6px rgba(0,0,0,0.08);
           position:relative;
+          transition: border-color .2s, box-shadow .2s, background .2s;
         }
         legend {
           font-weight:700;
@@ -64,9 +65,18 @@
           cursor:pointer;
           transition:0.2s;
         }
-        #submitQuiz:hover {
-          background:#098b50;
-        }
+        #submitQuiz:hover { background:#098b50; }
+
+        /* ✅ feedback visual por card */
+        .is-correct { border:2px solid #0a7a44 !important; background:#eaf7f0 !important; box-shadow:0 0 0 3px rgba(10,122,68,0.08); }
+        .is-wrong   { border:2px solid #b00020 !important; background:#fff0f0 !important; box-shadow:0 0 0 3px rgba(176,0,32,0.08); }
+        .q-feedback { margin-top:8px; font-size:14px; font-weight:600; }
+        .q-feedback.ok { color:#0a7a44; }
+        .q-feedback.err { color:#b00020; }
+
+        /* área do placar */
+        #scoreWrap { margin-top:12px; text-align:center; font-size:16px; }
+        #scoreWrap b { color:#0a3b66; }
       </style>
 
       <!-- ✝ Perguntas com desenhos -->
@@ -75,6 +85,7 @@
         <label><input type="radio" name="q1" value="a"> Jeremias</label>
         <label><input type="radio" name="q1" value="b"> Ezequiel</label>
         <label><input type="radio" name="q1" value="c"> Isaías</label>
+        <div class="q-feedback" aria-live="polite"></div>
       </fieldset>
 
       <fieldset>
@@ -82,6 +93,7 @@
         <label><input type="radio" name="q2" value="a"> Saul</label>
         <label><input type="radio" name="q2" value="b"> Davi</label>
         <label><input type="radio" name="q2" value="c"> Salomão</label>
+        <div class="q-feedback" aria-live="polite"></div>
       </fieldset>
 
       <fieldset>
@@ -89,6 +101,7 @@
         <label><input type="radio" name="q3" value="a"> Pedro</label>
         <label><input type="radio" name="q3" value="b"> João</label>
         <label><input type="radio" name="q3" value="c"> Tiago</label>
+        <div class="q-feedback" aria-live="polite"></div>
       </fieldset>
 
       <fieldset>
@@ -96,6 +109,7 @@
         <label><input type="radio" name="q4" value="a"> Rute</label>
         <label><input type="radio" name="q4" value="b"> Ester</label>
         <label><input type="radio" name="q4" value="c"> Sara</label>
+        <div class="q-feedback" aria-live="polite"></div>
       </fieldset>
 
       <fieldset>
@@ -103,6 +117,7 @@
         <label><input type="radio" name="q5" value="a"> Golias</label>
         <label><input type="radio" name="q5" value="b"> Sansão</label>
         <label><input type="radio" name="q5" value="c"> Davi</label>
+        <div class="q-feedback" aria-live="polite"></div>
       </fieldset>
 
       <fieldset>
@@ -110,6 +125,7 @@
         <label><input type="radio" name="q6" value="a"> Jerusalém</label>
         <label><input type="radio" name="q6" value="b"> Filipos</label>
         <label><input type="radio" name="q6" value="c"> Roma</label>
+        <div class="q-feedback" aria-live="polite"></div>
       </fieldset>
 
       <fieldset>
@@ -117,6 +133,7 @@
         <label><input type="radio" name="q7" value="a"> Abrão</label>
         <label><input type="radio" name="q7" value="b"> Adão</label>
         <label><input type="radio" name="q7" value="c"> Absalão</label>
+        <div class="q-feedback" aria-live="polite"></div>
       </fieldset>
 
       <fieldset>
@@ -124,6 +141,7 @@
         <label><input type="radio" name="q8" value="a"> 1º Mandamento</label>
         <label><input type="radio" name="q8" value="b"> 2º Mandamento</label>
         <label><input type="radio" name="q8" value="c"> 5º Mandamento</label>
+        <div class="q-feedback" aria-live="polite"></div>
       </fieldset>
 
       <fieldset>
@@ -131,6 +149,7 @@
         <label><input type="radio" name="q9" value="a"> Monte Sinai</label>
         <label><input type="radio" name="q9" value="b"> Monte Carmelo</label>
         <label><input type="radio" name="q9" value="c"> Monte Nebo</label>
+        <div class="q-feedback" aria-live="polite"></div>
       </fieldset>
 
       <fieldset>
@@ -138,6 +157,7 @@
         <label><input type="radio" name="q10" value="a"> 27</label>
         <label><input type="radio" name="q10" value="b"> 39</label>
         <label><input type="radio" name="q10" value="c"> 66</label>
+        <div class="q-feedback" aria-live="polite"></div>
       </fieldset>
 
       <div style="text-align:center;margin-top:20px;">
@@ -147,6 +167,7 @@
 
     <div id="resultMessage" aria-live="polite" 
          style="margin-top:18px;text-align:center;font-size:18px;font-weight:700;"></div>
+    <div id="scoreWrap" aria-live="polite"></div>
   </div>
 
   <footer style="margin-top:25px;font-size:14px;color:#555;text-align:center;">
@@ -163,6 +184,7 @@
   };
   const submitBtn = document.getElementById('submitQuiz');
   const resultDiv = document.getElementById('resultMessage');
+  const scoreWrap = document.getElementById('scoreWrap');
   const nameInput = document.getElementById('participantName');
 
   submitBtn.addEventListener('click', function(){
@@ -170,42 +192,85 @@
     if(!name){
       resultDiv.style.color = '#b00020';
       resultDiv.textContent = '✋ Por favor, digite seu nome antes de enviar.';
+      scoreWrap.textContent = '';
       return;
     }
 
     let score = 0;
+    let unanswered = false;
+
+    // limpa estados anteriores
+    document.querySelectorAll('fieldset').forEach(fs => {
+      fs.classList.remove('is-correct','is-wrong');
+      const fb = fs.querySelector('.q-feedback');
+      if (fb) { fb.textContent = ''; fb.classList.remove('ok','err'); }
+    });
+
     for(let i=1;i<=10;i++){
-      const radios = document.getElementsByName('q'+i);
+      const qName = 'q'+i;
+      const radios = document.getElementsByName(qName);
+      const fieldset = radios.length ? radios[0].closest('fieldset') : null;
       let chosen = null;
-      for(const r of radios){
-        if(r.checked){ chosen = r.value; break; }
-      }
+      for(const r of radios){ if(r.checked){ chosen = r.value; break; } }
+
       if(!chosen){
-        resultDiv.style.color = '#b00020';
-        resultDiv.textContent = '🧐 Responda todas as perguntas antes de enviar.';
-        return;
+        unanswered = true;
+        break; // mantém comportamento: exige todas respondidas
       }
-      if(chosen === correctAnswers['q'+i]) score++;
+
+      const isRight = (chosen === correctAnswers[qName]);
+      if(isRight) score++;
+
+      // pinta o card e mostra feedback curto
+      if (fieldset){
+        fieldset.classList.add(isRight ? 'is-correct' : 'is-wrong');
+        const fb = fieldset.querySelector('.q-feedback');
+        if (fb){
+          if (isRight){
+            fb.textContent = '✔ Resposta correta!';
+            fb.classList.add('ok');
+          } else {
+            fb.textContent = '✘ Resposta incorreta.';
+            fb.classList.add('err');
+          }
+        }
+      }
     }
 
+    if(unanswered){
+      resultDiv.style.color = '#b00020';
+      resultDiv.textContent = '🧐 Responda todas as perguntas antes de enviar.';
+      scoreWrap.textContent = '';
+      return;
+    }
+
+    const errors = 10 - score;
     const percentage = (score / 10) * 100;
+
+    // exibe placar
+    scoreWrap.innerHTML = `<b>Placar:</b> Acertos: <b>${score}</b> | Erros: <b>${errors}</b> — Aproveitamento: <b>${percentage}%</b>`;
+
+    // mantém as frases finais (corrigido para template literals)
     if(percentage === 100){
       resultDiv.style.color = '#0a7a44';
-      resultDiv.textContent = 🏆 Parabéns, ${escapeHtml(name)}! Você acertou todas! Que bênção e sabedoria! 🙌;
+      resultDiv.textContent = `🏆 Parabéns, ${escapeHtml(name)}! Você acertou todas! Que bênção e sabedoria! 🙌`;
     } else if(percentage >= 70){
       resultDiv.style.color = '#0a7a44';
-      resultDiv.textContent = 👏 Muito bem, ${escapeHtml(name)}! Você acertou ${score}/10. Continue firme nos estudos da Palavra! 📖;
+      resultDiv.textContent = `👏 Muito bem, ${escapeHtml(name)}! Você acertou ${score}/10. Continue firme nos estudos da Palavra! 📖`;
     } else {
       resultDiv.style.color = '#aa5500';
-      resultDiv.textContent = 😅 ${escapeHtml(name)}, você acertou ${score}/10. Continue se dedicando — o conhecimento da Palavra vem com fé! 🙏;
+      resultDiv.textContent = `😅 ${escapeHtml(name)}, você acertou ${score}/10. Continue se dedicando — o conhecimento da Palavra vem com fé! 🙏`;
     }
+
+    // rola para o resultado em telas pequenas
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 
   function escapeHtml(str){
     return str.replace(/[&<>"']/g, function(m){
-      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m]);
     });
   }
 })();
 </script>
-<!-- ✨ Fim: Quiz Bíblico Avançado com Desenhos - Desenvolvido por Eng. Lucas -->
+<!-- ✨ Fim: Quiz Bíblico Avançado com Desenhos - Desenvolvido por Eng. Lucas -->
